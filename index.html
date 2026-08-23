@@ -3,64 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle Financeiro</title>
+    <title>Controle Financeiro Avançado</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Importando o Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Minhas Finanças</h1>
+        <h1>Minhas Finanças & Planejamento</h1>
     </header>
 
     <main class="container">
         <!-- Cartões de Resumo -->
         <section class="cards">
             <div class="card income">
-                <h3>Entradas</h3>
+                <h3>Entradas (Mês)</h3>
                 <p id="income-display">R$ 0,00</p>
             </div>
             <div class="card expense">
-                <h3>Saídas</h3>
+                <h3>Saídas (Mês)</h3>
                 <p id="expense-display">R$ 0,00</p>
             </div>
             <div class="card total">
-                <h3>Saldo Total</h3>
+                <h3>Saldo Atual</h3>
                 <p id="total-display">R$ 0,00</p>
+            </div>
+            <div class="card projection-highlight">
+                <h3>Balanço Fixo Mensal</h3>
+                <p id="monthly-net-display" style="font-size: 1.2rem; margin-top: 10px;">R$ 0,00</p>
+                <small>O que sobra/falta todo mês</small>
             </div>
         </section>
 
         <section class="dashboard">
-            <!-- Formulário de Transações -->
+            <!-- Formulário -->
             <div class="form-container">
                 <h2>Nova Transação</h2>
                 <form id="transaction-form">
                     <div class="form-control">
                         <label for="description">Descrição</label>
-                        <input type="text" id="description" placeholder="Ex: Salário, Mercado..." required>
+                        <input type="text" id="description" placeholder="Ex: Psicólogo, Streamings..." required>
                     </div>
                     <div class="form-control">
                         <label for="amount">Valor (R$)</label>
-                        <input type="number" id="amount" placeholder="Ex: -50.00 para saídas" step="0.01" required>
-                        <small>Use sinal negativo (-) para despesas e positivo para receitas.</small>
+                        <input type="number" id="amount" placeholder="-50.00 para saídas" step="0.01" required>
+                    </div>
+                    <div class="form-control checkbox-control">
+                        <input type="checkbox" id="is-recurring">
+                        <label for="is-recurring">Débito/Crédito Fixo Mensal</label>
                     </div>
                     <button class="btn" type="submit">Adicionar</button>
                 </form>
             </div>
 
-            <!-- Área do Gráfico -->
+            <!-- Gráfico Atual -->
             <div class="chart-container">
-                <h2>Resumo de Despesas vs Receitas</h2>
+                <h2>Composição do Mês</h2>
                 <canvas id="financeChart"></canvas>
             </div>
         </section>
 
-        <!-- Lista de Histórico -->
-        <section class="history">
-            <h2>Histórico de Transações</h2>
-            <ul id="transaction-list" class="list">
-                <!-- As transações aparecerão aqui -->
-            </ul>
+        <!-- Projeção Futura -->
+        <section class="projection-section">
+            <div class="projection-header">
+                <h2>Projeção de Salário e Gastos</h2>
+                <div class="months-selector">
+                    <label for="months-project">Projetar para (meses): </label>
+                    <input type="number" id="months-project" value="6" min="1" max="24">
+                </div>
+            </div>
+            <div class="projection-body">
+                <canvas id="projectionChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Listas separadas -->
+        <section class="history-grid">
+            <div class="history-column">
+                <h2>Fixos Mensais</h2>
+                <ul id="recurring-list" class="list"></ul>
+            </div>
+            <div class="history-column">
+                <h2>Variáveis do Mês</h2>
+                <ul id="variable-list" class="list"></ul>
+            </div>
         </section>
     </main>
 
