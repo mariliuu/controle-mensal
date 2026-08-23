@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Importando o Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Minhas Finanças</h1>
+    </header>
+
+    <main class="container">
+        <!-- Cartões de Resumo -->
+        <section class="cards">
+            <div class="card income">
+                <h3>Entradas</h3>
+                <p id="income-display">R$ 0,00</p>
+            </div>
+            <div class="card expense">
+                <h3>Saídas</h3>
+                <p id="expense-display">R$ 0,00</p>
+            </div>
+            <div class="card total">
+                <h3>Saldo Total</h3>
+                <p id="total-display">R$ 0,00</p>
+            </div>
+        </section>
+
+        <section class="dashboard">
+            <!-- Formulário de Transações -->
+            <div class="form-container">
+                <h2>Nova Transação</h2>
+                <form id="transaction-form">
+                    <div class="form-control">
+                        <label for="description">Descrição</label>
+                        <input type="text" id="description" placeholder="Ex: Salário, Mercado..." required>
+                    </div>
+                    <div class="form-control">
+                        <label for="amount">Valor (R$)</label>
+                        <input type="number" id="amount" placeholder="Ex: -50.00 para saídas" step="0.01" required>
+                        <small>Use sinal negativo (-) para despesas e positivo para receitas.</small>
+                    </div>
+                    <button class="btn" type="submit">Adicionar</button>
+                </form>
+            </div>
+
+            <!-- Área do Gráfico -->
+            <div class="chart-container">
+                <h2>Resumo de Despesas vs Receitas</h2>
+                <canvas id="financeChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Lista de Histórico -->
+        <section class="history">
+            <h2>Histórico de Transações</h2>
+            <ul id="transaction-list" class="list">
+                <!-- As transações aparecerão aqui -->
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
